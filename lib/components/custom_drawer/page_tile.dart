@@ -7,10 +7,10 @@ class PageTile extends StatelessWidget {
   final bool highlighted;
 
   PageTile({
-    required this.label, 
-    required this.iconData, 
-    required this.onTap, 
-    required this.highlighted
+    this.label, 
+    this.iconData, 
+    this.onTap, 
+    this.highlighted
   });
 
   @override

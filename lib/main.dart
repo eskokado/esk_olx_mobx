@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 import 'screens/base/base_screen.dart';
+import 'stores/page_store.dart';
 
 Future<void> main() async {
   await initializeParse();
+  setupLocators();
   runApp(MyApp());
+}
 
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 Future<void> initializeParse() async {
