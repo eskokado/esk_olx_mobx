@@ -88,5 +88,23 @@ abstract class _SignupStoreBase with Store {
     else
       return 'Senhas não conferem';
   }
-  
+
+  @computed
+  bool get isFormValid =>
+      nameValid && emailValid && phoneValid && pass1Valid && pass2Valid;
+
+  @computed
+  Function get signupPressed => isFormValid && !loading ? _signup : null;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> _signup() async {
+    loading = true;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    loading = false;
+  }
 }
