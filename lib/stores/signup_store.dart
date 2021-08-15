@@ -1,5 +1,8 @@
 ﻿import 'package:mobx/mobx.dart';
-import 'package:xlo_mobx/helpers/extensions.dart';
+
+import '../helpers/extensions.dart';
+import '../models/user.dart';
+import '../repositories/user_repository.dart';
 
 part 'signup_store.g.dart';
 
@@ -103,7 +106,14 @@ abstract class _SignupStoreBase with Store {
   Future<void> _signup() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    final user = User(
+      name: name,
+      email: email,
+      phone: phone,
+      password: pass1,
+    );
+
+    await UserRepository().signup(user);
 
     loading = false;
   }
