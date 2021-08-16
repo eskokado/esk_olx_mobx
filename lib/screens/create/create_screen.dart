@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../components/custom_drawer/custom_drawer.dart';
+import 'components/images_field.dart';
 
 class CreateScreen extends StatelessWidget {
   final labelStyle = TextStyle(
@@ -22,6 +23,7 @@ class CreateScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Card(
+        clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.symmetric(horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -30,6 +32,7 @@ class CreateScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ImagesField(),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Título *',
