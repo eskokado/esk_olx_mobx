@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'screens/category/category_screen.dart';
 
 import 'screens/base/base_screen.dart';
 import 'stores/category_store.dart';
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
         cursorColor: Colors.orange,
       ),
-      home: CategoryScreen(),
+      home: BaseScreen(),
     );
   }
 }
