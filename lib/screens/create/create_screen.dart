@@ -6,6 +6,7 @@ import '../../components/custom_drawer/custom_drawer.dart';
 import '../../stores/create_store.dart';
 import 'components/category_field.dart';
 import 'components/cep_field.dart';
+import 'components/hide_phone_field.dart';
 import 'components/images_field.dart';
 
 class CreateScreen extends StatelessWidget {
@@ -13,10 +14,10 @@ class CreateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labelStyle = TextStyle(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.grey,
-                    fontSize: 18,
-                  );
+      fontWeight: FontWeight.w800,
+      color: Colors.grey,
+      fontSize: 18,
+    );
 
     final contentPadding = const EdgeInsets.fromLTRB(16, 10, 12, 10);
 
@@ -35,6 +36,7 @@ class CreateScreen extends StatelessWidget {
           ),
           elevation: 8,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
               ImagesField(createStore),
@@ -66,7 +68,24 @@ class CreateScreen extends StatelessWidget {
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   RealInputFormatter(centavos: true),
-                ],              
+                ],
+              ),
+              HidePhoneField(createStore),
+              SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Enviar',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.white,
+                    primary: Colors.orange,
+                    onSurface: Colors.orange.withAlpha(120),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
               ),
             ],
           ),
