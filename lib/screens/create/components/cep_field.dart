@@ -4,31 +4,39 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../stores/cep_store.dart';
+import '../../../stores/create_store.dart';
 
 class CepField extends StatelessWidget {
-  CepStore cepStore = CepStore();
+  final CreateStore createStore;
+  final CepStore cepStore;
+
+  CepField(this.createStore) : cepStore = createStore.cepStore;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextFormField(
-          onChanged: cepStore.setCep,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            CepInputFormatter(),
-          ],
-          decoration: InputDecoration(
-            labelText: 'CEP *',
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w800,
-              color: Colors.grey,
-              fontSize: 18,
+        Observer(builder: (_) {
+          return TextFormField(
+            onChanged: cepStore.setCep,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              CepInputFormatter(),
+            ],
+            decoration: InputDecoration(
+              errorText: createStore.addressError,
+              labelText: 'CEP *',
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Colors.grey,
+                fontSize: 18,
+              ),
+              contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
             ),
-            contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
-          ),
-        ),
+          );
+        }),
         Observer(builder: (_) {
           if (cepStore.address == null &&
               cepStore.error == null &&
@@ -39,7 +47,7 @@ class CepField extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation(Colors.purple),
               backgroundColor: Colors.transparent,
             );
-          else if (cepStore.error != null) 
+          else if (cepStore.error != null)
             return Container(
               color: Colors.red.withAlpha(100),
               height: 50,
@@ -56,7 +64,7 @@ class CepField extends StatelessWidget {
             );
           else {
             final a = cepStore.address;
-            return Container (
+            return Container(
               color: Colors.purple.withAlpha(150),
               height: 50,
               padding: const EdgeInsets.all(8),
@@ -70,7 +78,6 @@ class CepField extends StatelessWidget {
               ),
             );
           }
-
         }),
       ],
     );
