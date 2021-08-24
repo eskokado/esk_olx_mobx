@@ -125,6 +125,9 @@ abstract class _CreateStore with Store {
   @observable
   String error;
 
+  @observable
+  Ad savedAd;
+
   @action
   void invalidSendPressed() => showErrors = true;
 
@@ -142,7 +145,7 @@ abstract class _CreateStore with Store {
 
     try {
       loading = true;
-      final response = await AdRepository.save(ad);
+      savedAd = await AdRepository.save(ad);
       loading = false;
     } catch (e) {
       error = e;

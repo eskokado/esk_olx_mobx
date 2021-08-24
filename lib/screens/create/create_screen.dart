@@ -2,17 +2,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../components/custom_drawer/custom_drawer.dart';
 import '../../components/error_box.dart';
 import '../../stores/create_store.dart';
+import '../../stores/page_store.dart';
 import 'components/category_field.dart';
 import 'components/cep_field.dart';
 import 'components/hide_phone_field.dart';
 import 'components/images_field.dart';
 
-class CreateScreen extends StatelessWidget {
+class CreateScreen extends StatefulWidget {
+  @override
+  _CreateScreenState createState() => _CreateScreenState();
+}
+
+class _CreateScreenState extends State<CreateScreen> {
   final CreateStore createStore = CreateStore();
+
+  @override
+  void initState() {
+    super.initState();
+    when((_) => createStore.savedAd != null, () {
+      GetIt.I<PageStore>().setPage(0);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final labelStyle = TextStyle(

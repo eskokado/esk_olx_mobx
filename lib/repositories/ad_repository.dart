@@ -8,7 +8,7 @@ import '../models/ad.dart';
 import 'parse_errors.dart';
 
 class AdRepository {
-  static void save(Ad ad) async {
+  static Future<Ad> save(Ad ad) async {
     try {
       final parseImages = await saveImages(ad.images);
 
@@ -42,7 +42,7 @@ class AdRepository {
       final response = await adObject.save();
 
       if (response.success) {
-        return response.result;
+        return Ad.fromParse(response.result);
       } else {
         return Future.error(ParseErrors.getDescription(response.error.code));
       }
