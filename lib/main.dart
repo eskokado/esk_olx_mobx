@@ -7,6 +7,7 @@ import 'repositories/ibge_repository.dart';
 
 import 'screens/base/base_screen.dart';
 import 'stores/category_store.dart';
+import 'stores/home_store.dart';
 import 'stores/page_store.dart';
 import 'stores/user_manager_store.dart';
 
@@ -21,6 +22,7 @@ Future<void> main() async {
 
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(HomeStore());
   GetIt.I.registerSingleton(UserManagerStore());
   GetIt.I.registerSingleton(CategoryStore());
 }
