@@ -1,20 +1,40 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../../stores/home_store.dart';
+import '../../category/category_screen.dart';
 import 'bar_button.dart';
 
 class TopBar extends StatelessWidget {
+  final HomeStore homeStore = GetIt.I<HomeStore>();
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Row(
       children: [
-        BarButton(
-          label: 'Categorias',
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey[400]),
-            ),
-          ),
-          onTap: () {},
+        Observer(
+          builder: (_) {
+            return BarButton(
+              label: homeStore.category?.description ?? 'Categorias',
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey[400]),
+                ),
+              ),
+              onTap: () async {
+                final category = await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => CategoryScreen(
+                      showAll: true,
+                      selected: homeStore.category,
+                    ),
+                  ),
+                );
+                if (category != null) homeStore.setCategory(category);
+              },
+            );
+          },
         ),
         BarButton(
           label: 'Filtros',
