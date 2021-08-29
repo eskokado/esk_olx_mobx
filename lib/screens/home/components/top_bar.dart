@@ -4,13 +4,14 @@ import 'package:get_it/get_it.dart';
 
 import '../../../stores/home_store.dart';
 import '../../category/category_screen.dart';
+import '../../filter/filter_screen.dart';
 import 'bar_button.dart';
 
 class TopBar extends StatelessWidget {
   final HomeStore homeStore = GetIt.I<HomeStore>();
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Observer(
@@ -44,7 +45,11 @@ class TopBar extends StatelessWidget {
               left: BorderSide(color: Colors.grey[400]),
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => FilterScreen()),
+            );
+          },
         ),
       ],
     );
