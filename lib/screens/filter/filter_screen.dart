@@ -3,6 +3,7 @@
 import '../../stores/filter_store.dart';
 import 'components/order_by_field.dart';
 import 'components/price_range_field.dart';
+import 'components/vendor_type_field.dart';
 
 class FilterScreen extends StatelessWidget {
   final FilterStore filterStore = FilterStore();
@@ -27,6 +28,7 @@ class FilterScreen extends StatelessWidget {
               children: [
                 OrderByField(filterStore),
                 PriceRangeField(filterStore),
+                VendorTypeField(filterStore),
               ],
             ),
           ),
