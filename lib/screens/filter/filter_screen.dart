@@ -47,7 +47,6 @@ class FilterScreen extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                           ),
                         ),
-                        onPressed: filterStore.isFormValid ? () {} : null,
                         child: Text(
                           'FILTRAR',
                           style: TextStyle(
@@ -55,6 +54,12 @@ class FilterScreen extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
+                        onPressed: filterStore.isFormValid
+                            ? () {
+                                filterStore.save();
+                                Navigator.of(context).pop();
+                              }
+                            : null,
                       ),
                     );
                   },
