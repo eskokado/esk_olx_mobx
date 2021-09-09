@@ -1,5 +1,6 @@
 ﻿import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../../../helpers/extensions.dart';
 
 import '../../../models/ad.dart';
 
@@ -45,14 +46,14 @@ class AdTile extends StatelessWidget {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      'R\$ ${ad.price.toStringAsFixed(2)}',
+                      ad.price.formattedMoney(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      '${ad.createdAt} - '
+                      '${ad.createdAt.formattedDate()} - '
                       '${ad.address.city.name} - '
                       '${ad.address.uf.initials}',
                       style: TextStyle(
