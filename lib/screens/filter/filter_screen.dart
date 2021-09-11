@@ -39,6 +39,7 @@ class FilterScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                          elevation: 0,
                           onPrimary: Colors.white,
                           primary: Colors.orange,
                           onSurface: Colors.orange.withAlpha(120),
